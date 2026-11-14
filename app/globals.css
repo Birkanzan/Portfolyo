@@ -1,0 +1,241 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   Color primitives (Radix-style 12-step ramps, OKLCH, all in sRGB).
+   Generated with culori; contrast of every semantic pair measured in
+   both themes (see README → Design tokens). Never use these directly
+   in components — use the semantic tokens in @theme below.
+   ------------------------------------------------------------------ */
+:root {
+  color-scheme: light;
+  --neutral-1: oklch(99.3% 0.004 60);
+  --neutral-2: oklch(97.8% 0.007 60);
+  --neutral-3: oklch(95.5% 0.007 60);
+  --neutral-4: oklch(93% 0.007 60);
+  --neutral-6: oklch(87.5% 0.007 60);
+  --neutral-7: oklch(82.5% 0.007 60);
+  --neutral-8: oklch(66% 0.007 60);
+  --neutral-11: oklch(48% 0.007 60);
+  --neutral-12: oklch(23.5% 0.007 60);
+
+  --accent-3: oklch(95.5% 0.015 48);
+  --accent-4: oklch(93% 0.027 48);
+  --accent-6: oklch(87.5% 0.055 48);
+  --accent-7: oklch(82.5% 0.08 48);
+  --accent-9: oklch(71% 0.193 48);
+  --accent-10: oklch(66.5% 0.181 48);
+  --accent-11: oklch(50% 0.129 48);
+
+  /* Roles that map to different steps per theme */
+  --role-focus: var(--accent-11);
+  --role-on-accent: var(--neutral-12);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --neutral-1: oklch(16.5% 0.008 60);
+  --neutral-2: oklch(19.5% 0.008 60);
+  --neutral-3: oklch(23% 0.008 60);
+  --neutral-4: oklch(26% 0.008 60);
+  --neutral-6: oklch(32.5% 0.008 60);
+  --neutral-7: oklch(38.5% 0.008 60);
+  --neutral-8: oklch(50% 0.008 60);
+  --neutral-11: oklch(84% 0.008 60);
+  --neutral-12: oklch(95.5% 0.008 60);
+
+  --accent-3: oklch(23% 0.031 48);
+  --accent-4: oklch(26% 0.039 48);
+  --accent-6: oklch(32.5% 0.053 48);
+  --accent-7: oklch(38.5% 0.065 48);
+  --accent-9: oklch(72% 0.166 48);
+  --accent-10: oklch(77.5% 0.122 48);
+  --accent-11: oklch(82% 0.088 48);
+
+  --role-focus: var(--accent-9);
+  --role-on-accent: var(--neutral-1);
+}
+
+/* ------------------------------------------------------------------
+   Semantic tokens → Tailwind utilities (bg-bg-page, text-text-primary…)
+   ------------------------------------------------------------------ */
+@theme static {
+  --color-*: initial;
+  --color-bg-page: var(--neutral-1);
+  --color-bg-surface: var(--neutral-2);
+  --color-bg-sunken: var(--neutral-3);
+  --color-bg-surface-hover: var(--neutral-4);
+  --color-border-separator: var(--neutral-6);
+  --color-border: var(--neutral-7);
+  --color-border-strong: var(--neutral-8);
+  --color-text-primary: var(--neutral-12);
+  --color-text-secondary: var(--neutral-11);
+  --color-text-on-accent: var(--role-on-accent);
+  --color-accent-subtle: var(--accent-3);
+  --color-accent-subtle-hover: var(--accent-4);
+  --color-accent-border: var(--accent-7);
+  --color-accent-border-subtle: var(--accent-6);
+  --color-accent-solid: var(--accent-9);
+  --color-accent-solid-hover: var(--accent-10);
+  --color-accent-text: var(--accent-11);
+  --color-focus-ring: var(--role-focus);
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Type: Geist (sans) + Geist Mono, loaded with next/font */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, 'Cascadia Mono', Consolas, monospace;
+
+  /* Type scale, named by role. Each size carries its line-height. */
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.4;
+  --text-body-sm: 0.9375rem;
+  --text-body-sm--line-height: 1.55;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  --text-lead--line-height: 1.55;
+  --text-heading: 1.25rem;
+  --text-heading--line-height: 1.3;
+  --text-title: clamp(1.875rem, 1.5rem + 1.6vw, 2.75rem);
+  --text-title--line-height: 1.15;
+  --text-display: clamp(3rem, 1.75rem + 6vw, 6rem);
+  --text-display--line-height: 1.05;
+
+  --container-content: 72rem;
+  --container-prose: 40rem;
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-block-start: 5rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg-page);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    text-underline-position: from-font;
+    text-decoration-thickness: from-font;
+    text-underline-offset: 0.2em;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-solid);
+    color: var(--color-text-on-accent);
+  }
+
+  /* Ring color is set up front so color transitions never animate it */
+  a,
+  button {
+    outline-color: var(--color-focus-ring);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: var(--color-focus-ring);
+    outline-offset: 3px;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Motion: subtle reveal on scroll. Only when the user has no
+   reduced-motion preference and the browser supports scroll-driven
+   animations; otherwise content is simply visible.
+   ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+
+
+  .pixel-blink {
+    /* Two short pulses, finished within 5 s (WCAG 2.2.2) */
+    animation: pixel-blink 1.6s ease-in-out 2;
+  }
+}
+
+/* Movement only: content stays fully opaque, so text is readable (and
+   measurable) at every point of the animation. */
+@keyframes reveal {
+  from {
+    translate: 0 2rem;
+  }
+}
+
+
+@keyframes pixel-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+/* Contextual icon swap (copy → copied): both icons stay in the DOM and
+   cross-fade. Movement and blur only when motion is allowed. */
+.icon-swap {
+  display: inline-grid;
+}
+.icon-swap > * {
+  grid-area: 1 / 1;
+  transition: opacity 300ms cubic-bezier(0.2, 0, 0, 1);
+}
+.icon-swap[data-state='off'] > .icon-on,
+.icon-swap[data-state='on'] > .icon-off {
+  opacity: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .icon-swap > * {
+    transition-property: opacity, scale, filter;
+  }
+  .icon-swap[data-state='off'] > .icon-on,
+  .icon-swap[data-state='on'] > .icon-off {
+    scale: 0.25;
+    filter: blur(4px);
+  }
+}
+
+/* Increased contrast: strengthen borders and secondary text per theme */
+@media (prefers-contrast: more) {
+  :root {
+    --neutral-7: oklch(60% 0.007 60);
+    --neutral-11: oklch(38% 0.007 60);
+  }
+  :root[data-theme='dark'] {
+    --neutral-7: oklch(62% 0.008 60);
+    --neutral-11: oklch(92% 0.008 60);
+  }
+}
